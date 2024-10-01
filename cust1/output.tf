@@ -11,6 +11,14 @@ output "Password" {
   value = aws_instance.fgtvm.id
 }
 
+output "vpc_id" {
+  value = aws_vpc.fgtvm-vpc.id
+}
+
+output "vpc_cidr" {
+  value = var.vpccidr
+}
+
 output "PulicSubnetID" {
   value = aws_subnet.publicsubnetaz1.id
 }

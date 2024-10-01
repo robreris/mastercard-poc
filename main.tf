@@ -35,10 +35,12 @@ module "customer_two" {
 module "transitgwy" {
   source = "./transitgwy"
 
-  cust1_sn_id = module.cust1.TGWSubnetID
-  cust1_vpc_id = module.cust1.vpcid
-  cust2_sn_id = module.cust2.TGWSubnetID
-  cust2_vpc_id = module.cust2.vpcid
+  cust1_sn_id = module.customer_one.TGWSubnetID
+  cust1_vpc_id = module.customer_one.vpc_id
+  cust1_vpc_cidr = module.customer_one.vpc_cidr
+  cust2_sn_id = module.customer_two.TGWSubnetID
+  cust2_vpc_id = module.customer_two.vpc_id
+  cust2_vpc_cidr = module.customer_two.vpc_cidr
 
 }
 

@@ -33,6 +33,9 @@ variable "privatecidraz1" {
   default = "10.2.1.0/24"
 }
 
+variable "tgwcidraz1" {
+  default = "10.2.2.0/24"
+}
 
 // License Type to create FortiGate-VM
 // Provide the license type for FortiGate-VM Instances, either byol or payg.
