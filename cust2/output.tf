@@ -1,0 +1,21 @@
+
+output "FGTPublicIP" {
+  value = aws_eip.FGTPublicIP.public_ip
+}
+
+output "Username" {
+  value = "admin"
+}
+
+output "Password" {
+  value = aws_instance.fgtvm.id
+}
+
+output "PulicSubnetID" {
+  value = aws_subnet.publicsubnetaz1.id
+}
+
+output "TGWSubnetID" {
+  value = aws_subnet.tgwsubnetaz1.id 
+}
+
