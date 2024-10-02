@@ -9,3 +9,16 @@ variable "cust2_sn_id" {}
 variable "cust2_vpc_id" {}
 
 variable "cust2_vpc_cidr" {}
+
+variable "cust1_pubrt" {}
+
+variable "cust2_pubrt" {}
+
+variable "sec_vpc_id" {}
+
+variable "sec_vpc_cidr" {}
+
+variable "secvpcaz1_sn_id" {}
+
+variable "secvpcaz2_sn_id" {}
+

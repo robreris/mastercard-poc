@@ -23,14 +23,14 @@ resource "aws_route_table" "fgtvmprivatert" {
   }
 }
 
-//resource "aws_route" "externalroute" {
-//  route_table_id         = aws_route_table.fgtvmpublicrt.id
-//  destination_cidr_block = "0.0.0.0/0"
-//  gateway_id             = aws_internet_gateway.fgtvmigw.id
-//}
+resource "aws_route" "externalroute" {
+  route_table_id         = aws_route_table.fgtvmpublicrt.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.fgtvmigw.id
+}
 
 resource "aws_route" "internalroute" {
-  depends_on             = [aws_instance.fgtvm]
+  depends_on             = [aws_instance.fgtactive]
   route_table_id         = aws_route_table.fgtvmprivatert.id
   destination_cidr_block = "0.0.0.0/0"
   network_interface_id   = aws_network_interface.eth1.id
@@ -42,16 +42,55 @@ resource "aws_route_table_association" "public1associate" {
   route_table_id = aws_route_table.fgtvmpublicrt.id
 }
 
+resource "aws_route_table_association" "hasyncmgmt1associate" {
+  subnet_id      = aws_subnet.hasyncmgmtsubnetaz1.id
+  route_table_id = aws_route_table.fgtvmpublicrt.id
+}
+
+
+resource "aws_route_table_association" "public2associate" {
+  subnet_id      = aws_subnet.publicsubnetaz2.id
+  route_table_id = aws_route_table.fgtvmpublicrt.id
+}
+
+
+resource "aws_route_table_association" "hasyncmgmt2associate" {
+  subnet_id      = aws_subnet.hasyncmgmtsubnetaz2.id
+  route_table_id = aws_route_table.fgtvmpublicrt.id
+}
+
+
 resource "aws_route_table_association" "internalassociate" {
   subnet_id      = aws_subnet.privatesubnetaz1.id
   route_table_id = aws_route_table.fgtvmprivatert.id
 }
 
-resource "aws_eip" "FGTPublicIP" {
-  depends_on        = [aws_instance.fgtvm]
+resource "aws_route_table_association" "internal2associate" {
+  subnet_id      = aws_subnet.privatesubnetaz2.id
+  route_table_id = aws_route_table.fgtvmprivatert.id
+}
+
+resource "aws_eip" "ClusterPublicIP" {
+  depends_on        = [aws_instance.fgtactive]
   domain            = "vpc"
   network_interface = aws_network_interface.eth0.id
 }
+
+
+resource "aws_eip" "MGMTPublicIP" {
+  depends_on        = [aws_instance.fgtactive]
+  domain            = "vpc"
+  network_interface = aws_network_interface.eth2.id
+}
+
+resource "aws_eip" "PassiveMGMTPublicIP" {
+  depends_on        = [aws_instance.fgtpassive]
+  domain            = "vpc"
+  network_interface = aws_network_interface.passiveeth2.id
+}
+
+
+
 
 // Security Group
 
@@ -59,6 +98,13 @@ resource "aws_security_group" "public_allow" {
   name        = "Public Allow"
   description = "Public Allow traffic"
   vpc_id      = aws_vpc.fgtvm-vpc.id
+
+  ingress {
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
   ingress {
     from_port   = 22

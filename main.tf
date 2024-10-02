@@ -42,5 +42,8 @@ module "transitgwy" {
   cust2_vpc_id = module.customer_two.vpc_id
   cust2_vpc_cidr = module.customer_two.vpc_cidr
 
+  cust1_pubrt = module.customer_one.cust1_pubrt
+  cust2_pubrt = module.customer_two.cust2_pubrt
+
 }
 

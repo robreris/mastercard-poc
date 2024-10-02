@@ -23,11 +23,11 @@ resource "aws_route_table" "fgtvmprivatert" {
   }
 }
 
-resource "aws_route" "externalroute" {
-  route_table_id         = aws_route_table.fgtvmpublicrt.id
-  destination_cidr_block = "0.0.0.0/0"
-  gateway_id             = aws_internet_gateway.fgtvmigw.id
-}
+//resource "aws_route" "externalroute" {
+//  route_table_id         = aws_route_table.fgtvmpublicrt.id
+//  destination_cidr_block = "0.0.0.0/0"
+//  gateway_id             = aws_internet_gateway.fgtvmigw.id
+//}
 
 resource "aws_route" "internalroute" {
   depends_on             = [aws_instance.fgtvm]

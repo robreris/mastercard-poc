@@ -2,64 +2,54 @@
 variable "access_key" {}
 variable "secret_key" {}
 
-variable "tags-cust1" {
-  description 	= "Tags to apply to customer 2 VPC."
-  type		= map(string)
-  default 	= {}
-}
-
-variable "tags-cust2" {
-  description 	= "Tags to apply to customer 2 VPC."
-  type		= map(string)
-  default 	= {}
-}
-
 variable "region" {
   default = "us-east-1"
 }
 
-// Availability zones for the region
+// Availability zone 1 for the region
 variable "az1" {
   default = "us-east-1a"
 }
 
-// Customer 1 VPC
-variable "vpc1cidr" {
-  default = "10.1.0.0/16"
+// Availability zone 2 for the region
+variable "az2" {
+  default = "us-east-1c"
 }
 
-variable "publiccidraz1vpc1" {
-  default = "10.1.0.0/24"
+variable "vpccidr" {
+  default = "20.1.0.0/16"
 }
 
-variable "privatecidraz1vpc1" {
-  default = "10.1.1.0/24"
+variable "publiccidraz1" {
+  default = "20.1.0.0/24"
 }
 
-variable "tgwcidraz1vpc1" {
-  default = "10.1.2.0/24"
+variable "privatecidraz1" {
+  default = "20.1.1.0/24"
 }
 
-// Customer 2 VPC
-variable "vpc2cidr" {
-  default = "10.2.0.0/16"
+variable "hasyncmgmtcidraz1" {
+  default = "20.1.2.0/24"
 }
 
-variable "publiccidraz1vpc2" {
-  default = "10.2.0.0/24"
+variable "tgwycidraz1" {
+  default = "20.1.3.0/24"
 }
 
-variable "privatecidraz1vpc2" {
-  default = "10.2.1.0/24"
+variable "publiccidraz2" {
+  default = "20.1.10.0/24"
 }
 
-variable "tgwcidraz1vpc2" {
-  default = "10.2.2.0/24"
+variable "privatecidraz2" {
+  default = "20.1.11.0/24"
 }
 
-// Sec VPC
-variable "secvpccidr" {
-  default = "20.1.0.0/16" 
+variable "hasyncmgmtcidraz2" {
+  default = "20.1.12.0/24"
+}
+
+variable "tgwycidraz2" {
+  default = "20.1.13.0/24"
 }
 
 // License Type to create FortiGate-VM
@@ -385,22 +375,99 @@ variable "fgtami" {
   }
 }
 
-
 //  Existing SSH Key on the AWS 
 variable "keyname" {
-  default = "fgt-kp"
+  default = "<AWS SSH KEY>"
 }
 
+// HTTPS access port
 variable "adminsport" {
   default = "8443"
 }
 
-variable "bootstrap-fgtvm" {
-  // Change to your own path
-  type    = string
-  default = "fgtvm.conf"
+variable "activeport1" {
+  default = "20.1.0.10"
 }
 
+variable "activeport1mask" {
+  default = "255.255.255.0"
+}
+
+variable "activeport2" {
+  default = "20.1.1.10"
+}
+
+variable "activeport2mask" {
+  default = "255.255.255.0"
+}
+
+variable "activeport3" {
+  default = "20.1.2.10"
+}
+
+variable "activeport3mask" {
+  default = "255.255.255.0"
+}
+
+variable "passiveport1" {
+  default = "20.1.10.10"
+}
+
+variable "passiveport1mask" {
+  default = "255.255.255.0"
+}
+
+variable "passiveport2" {
+  default = "20.1.11.10"
+}
+
+variable "passiveport2mask" {
+  default = "255.255.255.0"
+}
+
+variable "passiveport3" {
+  default = "20.1.12.10"
+}
+
+variable "passiveport3mask" {
+  default = "255.255.255.0"
+}
+
+variable "activeport1gateway" {
+  default = "20.1.0.1"
+}
+
+variable "activeport2gateway" {
+  default = "20.1.1.1"
+}
+
+variable "activeport3gateway" {
+  default = "20.1.2.1"
+}
+
+variable "passiveport1gateway" {
+  default = "20.1.10.1"
+}
+
+variable "passiveport2gateway" {
+  default = "20.1.11.1"
+}
+
+variable "passiveport3gateway" {
+  default = "20.1.12.1"
+}
+
+variable "bootstrap-active" {
+  // Change to your own path
+  type    = string
+  default = "config-active.conf"
+}
+
+variable "bootstrap-passive" {
+  // Change to your own path
+  type    = string
+  default = "config-passive.conf"
+}
 
 // license file for the active fgt
 variable "license" {
@@ -408,3 +475,11 @@ variable "license" {
   type    = string
   default = "license.lic"
 }
+
+// license file for the passive fgt
+variable "license2" {
+  // Change to your own byol license file, license2.lic
+  type    = string
+  default = "license2.lic"
+}
+
