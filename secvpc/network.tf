@@ -23,6 +23,16 @@ resource "aws_route_table" "fgtvmprivatert" {
   }
 }
 
+resource "aws_route_table" "tgwrt" {
+  vpc_id = aws_vpc.fgtvm-vpc.id
+
+  route {
+    cidr_block           = "0.0.0.0/0"
+    network_interface_id = aws_network_interface.eth1.id
+  } 
+
+}
+
 resource "aws_route" "externalroute" {
   route_table_id         = aws_route_table.fgtvmpublicrt.id
   destination_cidr_block = "0.0.0.0/0"
@@ -68,6 +78,16 @@ resource "aws_route_table_association" "internalassociate" {
 resource "aws_route_table_association" "internal2associate" {
   subnet_id      = aws_subnet.privatesubnetaz2.id
   route_table_id = aws_route_table.fgtvmprivatert.id
+}
+
+resource "aws_route_table_association" "tgw1associate" {
+  subnet_id      = aws_subnet.tgwysubnetaz1.id
+  route_table_id = aws_route_table.tgwrt.id
+}
+
+resource "aws_route_table_association" "tgw2associate" {
+  subnet_id      = aws_subnet.tgwysubnetaz2.id
+  route_table_id = aws_route_table.tgwrt.id
 }
 
 resource "aws_eip" "ClusterPublicIP" {

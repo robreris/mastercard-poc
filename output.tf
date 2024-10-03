@@ -21,3 +21,27 @@ output "Cust1-Password" {
 output "Cust2-Password" {
   value = module.customer_two.Password
 }
+
+output "Security-VPC-Active-FGT-Public-IP" {
+  value = module.security_vpc.FGTActiveMGMTPublicIP
+}
+
+output "Security-VPC-FGT-Cluster-Public-FQDN" {
+  value = module.security_vpc.FGTClusterPublicFQDN
+}
+
+output "Security-VPC-FGT-Cluster-Public-IP" {
+  value = module.security_vpc.FGTClusterPublicIP
+}
+
+output "Security-VPC-FGT-Passive-MGMT-Public-IP" {
+  value = module.security_vpc.FGTPassiveMGMTPublicIP
+}
+
+output "Security-FGT-Username" {
+  value = module.security_vpc.Username
+}
+
+output "Security-FGT-Password" {
+  value = module.security_vpc.Password
+}

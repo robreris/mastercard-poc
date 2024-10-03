@@ -5,7 +5,7 @@ resource "aws_vpc" "fgtvm-vpc" {
   enable_dns_hostnames = true
   instance_tenancy     = "default"
   tags = {
-    Name = "terraform demo"
+    Name = "security vpc"
   }
 }
 
@@ -14,7 +14,7 @@ resource "aws_subnet" "publicsubnetaz1" {
   cidr_block        = var.publiccidraz1
   availability_zone = var.az1
   tags = {
-    Name = "public subnet az1"
+    Name = "secvpc public subnet az1"
   }
 }
 
@@ -23,7 +23,7 @@ resource "aws_subnet" "publicsubnetaz2" {
   cidr_block        = var.publiccidraz2
   availability_zone = var.az2
   tags = {
-    Name = "public subnet az2"
+    Name = "secvpc public subnet az2"
   }
 }
 
@@ -33,7 +33,7 @@ resource "aws_subnet" "privatesubnetaz1" {
   cidr_block        = var.privatecidraz1
   availability_zone = var.az1
   tags = {
-    Name = "private subnet az1"
+    Name = "secvpc private subnet az1"
   }
 }
 
@@ -42,7 +42,7 @@ resource "aws_subnet" "privatesubnetaz2" {
   cidr_block        = var.privatecidraz2
   availability_zone = var.az2
   tags = {
-    Name = "private subnet az2"
+    Name = "secvpc private subnet az2"
   }
 }
 
@@ -51,7 +51,7 @@ resource "aws_subnet" "hasyncmgmtsubnetaz1" {
   cidr_block        = var.hasyncmgmtcidraz1
   availability_zone = var.az1
   tags = {
-    Name = "hasyncmgmt subnet az1"
+    Name = "secvpc hasyncmgmt subnet az1"
   }
 }
 
@@ -60,7 +60,7 @@ resource "aws_subnet" "hasyncmgmtsubnetaz2" {
   cidr_block        = var.hasyncmgmtcidraz2
   availability_zone = var.az2
   tags = {
-    Name = "hasyncmgmt subnet az2"
+    Name = "secvpchasyncmgmt subnet az2"
   }
 }
 

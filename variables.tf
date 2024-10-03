@@ -62,6 +62,38 @@ variable "secvpccidr" {
   default = "20.1.0.0/16" 
 }
 
+variable "publiccidraz1sec" {
+  default = "20.1.0.0/24"
+}
+
+variable "privatecidraz1sec" {
+  default = "20.1.1.0/24"
+}
+
+variable "hasyncmgmtcidraz1sec" {
+  default = "20.1.2.0/24"
+}
+
+variable "tgwycidraz1sec" {
+  default = "20.1.3.0/24"
+}
+
+variable "publiccidraz2sec" {
+  default = "20.1.10.0/24"
+}
+
+variable "privatecidraz2sec" {
+  default = "20.1.11.0/24"
+}
+
+variable "hasyncmgmtcidraz2sec" {
+  default = "20.1.12.0/24"
+}
+
+variable "tgwycidraz2sec" {
+  default = "20.1.13.0/24"
+}
+
 // License Type to create FortiGate-VM
 // Provide the license type for FortiGate-VM Instances, either byol or payg.
 variable "license_type" {
