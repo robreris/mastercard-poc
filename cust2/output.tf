@@ -27,6 +27,10 @@ output "TGWSubnetID" {
   value = aws_subnet.tgwsubnetaz1.id 
 }
 
-output "cust2_pubrt" {
-  value = aws_route_table.fgtvmpublicrt.id
+output "OBSubnetID" {
+  value = aws_subnet.obsubnetaz1.id
+}
+
+output "cust2_obrt" {
+  value = aws_route_table.obrt.id
 }

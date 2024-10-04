@@ -33,3 +33,12 @@ resource "aws_subnet" "tgwsubnetaz1" {
     Name = "${var.vpc_name} tgw subnet az1"
   }
 }
+
+resource "aws_subnet" "obsubnetaz1" { 
+  vpc_id            = aws_vpc.fgtvm-vpc.id
+  cidr_block        = var.obcidraz1
+  availability_zone = var.az1
+  tags = {
+    Name = "${var.vpc_name} ob subnet az1"
+  }
+}

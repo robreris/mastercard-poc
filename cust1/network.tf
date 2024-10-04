@@ -31,12 +31,24 @@ resource "aws_route_table" "tgwrt" {
   }
 }
 
+resource "aws_route_table" "obrt" {
+  vpc_id = aws_vpc.fgtvm-vpc.id
+  tags = {
+    Name = "fgtvm-ob-rt"
+  }
+}
+
+resource "aws_route" "externalroute" {
+  route_table_id         = aws_route_table.fgtvmpublicrt.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.fgtvmigw.id
+}
+
 resource "aws_route" "internalroute" {
   depends_on             = [aws_instance.fgtvm]
   route_table_id         = aws_route_table.fgtvmprivatert.id
   destination_cidr_block = "0.0.0.0/0"
   network_interface_id   = aws_network_interface.eth1.id
-
 }
 
 resource "aws_route_table_association" "public1associate" {
@@ -52,6 +64,11 @@ resource "aws_route_table_association" "internalassociate" {
 resource "aws_route_table_association" "tgwyassociate" {
   subnet_id      = aws_subnet.tgwsubnetaz1.id
   route_table_id = aws_route_table.tgwrt.id
+}
+
+resource "aws_route_table_association" "obassociate" {
+  subnet_id      = aws_subnet.obsubnetaz1.id
+  route_table_id = aws_route_table.obrt.id
 }
 
 resource "aws_eip" "FGTPublicIP" {

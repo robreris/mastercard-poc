@@ -37,6 +37,10 @@ variable "tgwcidraz1" {
   default = "10.2.2.0/24"
 }
 
+variable "obcidraz1" {
+  default = "10.2.3.0/24"
+}
+
 // License Type to create FortiGate-VM
 // Provide the license type for FortiGate-VM Instances, either byol or payg.
 variable "license_type" {

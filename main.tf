@@ -9,6 +9,8 @@ module "customer_one" {
   publiccidraz1 	= var.publiccidraz1vpc1
   privatecidraz1 	= var.privatecidraz1vpc1
   tgwcidraz1 		= var.tgwcidraz1vpc1
+
+  obcidraz1             = var.obcidraz1vpc1
   
   tags = {
     Name = "customer one vpc"
@@ -26,6 +28,8 @@ module "customer_two" {
   publiccidraz1 	= var.publiccidraz1vpc2
   privatecidraz1 	= var.privatecidraz1vpc2
   tgwcidraz1 		= var.tgwcidraz1vpc2
+
+  obcidraz1             = var.obcidraz1vpc2
 
   tags = {
     Name = "customer two vpc"
@@ -56,12 +60,12 @@ module "transitgwy" {
   cust1_sn_id 		= module.customer_one.TGWSubnetID
   cust1_vpc_id 		= module.customer_one.vpc_id
   cust1_vpc_cidr 	= module.customer_one.vpc_cidr
-  cust1_pubrt 		= module.customer_one.cust1_pubrt
+  cust1_obrt 		= module.customer_one.cust1_obrt
 
   cust2_sn_id 		= module.customer_two.TGWSubnetID
   cust2_vpc_id 		= module.customer_two.vpc_id
   cust2_vpc_cidr 	= module.customer_two.vpc_cidr
-  cust2_pubrt 		= module.customer_two.cust2_pubrt
+  cust2_obrt 		= module.customer_two.cust2_obrt
 
   secvpcaz1_sn_id 	= module.security_vpc.tgwsnaz1
   secvpcaz2_sn_id 	= module.security_vpc.tgwsnaz2

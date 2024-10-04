@@ -5,17 +5,12 @@ resource "aws_vpc_endpoint" "ssm" {
   service_name      = "com.amazonaws.${var.region}.ssm"
   vpc_endpoint_type = "Interface"
 
-
   subnet_ids = [
     aws_subnet.privatesubnetaz1.id
   ]
 
-
   security_group_ids = [aws_security_group.vpc_endpoint_sg.id]
-
-
   private_dns_enabled = true
-
 
   tags = {
     Name = "SSM Endpoint"
@@ -29,17 +24,12 @@ resource "aws_vpc_endpoint" "ssm_messages" {
   service_name      = "com.amazonaws.${var.region}.ssmmessages"
   vpc_endpoint_type = "Interface"
 
-
   subnet_ids = [
     aws_subnet.privatesubnetaz1.id
   ]
 
-
   security_group_ids = [aws_security_group.vpc_endpoint_sg.id]
-
-
   private_dns_enabled = true
-
 
   tags = {
     Name = "SSM Messages Endpoint"
@@ -53,17 +43,12 @@ resource "aws_vpc_endpoint" "ec2messages" {
   service_name      = "com.amazonaws.${var.region}.ec2messages"
   vpc_endpoint_type = "Interface"
 
-
   subnet_ids = [
     aws_subnet.privatesubnetaz1.id
   ]
 
-
   security_group_ids = [aws_security_group.vpc_endpoint_sg.id]
-
-
   private_dns_enabled = true
-
 
   tags = {
     Name = "EC2 Messages Endpoint"
@@ -120,8 +105,7 @@ data "aws_ami" "amazon_linux" {
 }
 
 resource "aws_iam_role" "ec2_ssm_role" {
-  name = "ec2_ssm_role_cust1"
-
+  name = "ec2_ssm_role_cust2"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
@@ -140,7 +124,7 @@ resource "aws_iam_role_policy_attachment" "ssm_attach" {
 }
 
 resource "aws_iam_instance_profile" "ec2_ssm_instance_profile" {
-  name = "ec2_ssm_instance_profile_cust1"
+  name = "ec2_ssm_instance_profile_cust2"
   role = aws_iam_role.ec2_ssm_role.name
 }
 
@@ -194,7 +178,7 @@ resource "aws_instance" "amazon_linux_instance" {
 
   # (Optional) Add a name tag
   tags = {
-    Name = "AmazonLinuxSSMInstance - Cust1"
+    Name = "AmazonLinuxSSMInstance - Cust2"
   }
 
 }

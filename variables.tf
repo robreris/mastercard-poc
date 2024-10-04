@@ -40,6 +40,10 @@ variable "tgwcidraz1vpc1" {
   default = "10.1.2.0/24"
 }
 
+variable "obcidraz1vpc1" {
+  default = "10.1.3.0/24"
+}
+
 // Customer 2 VPC
 variable "vpc2cidr" {
   default = "10.2.0.0/16"
@@ -55,6 +59,10 @@ variable "privatecidraz1vpc2" {
 
 variable "tgwcidraz1vpc2" {
   default = "10.2.2.0/24"
+}
+
+variable "obcidraz1vpc2" {
+  default = "10.2.3.0/24"
 }
 
 // Sec VPC

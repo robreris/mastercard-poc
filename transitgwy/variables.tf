@@ -10,9 +10,9 @@ variable "cust2_vpc_id" {}
 
 variable "cust2_vpc_cidr" {}
 
-variable "cust1_pubrt" {}
+variable "cust1_obrt" {}
 
-variable "cust2_pubrt" {}
+variable "cust2_obrt" {}
 
 variable "sec_vpc_id" {}
 
