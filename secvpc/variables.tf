@@ -36,6 +36,10 @@ variable "tgwycidraz1" {
   default = "20.1.3.0/24"
 }
 
+variable "obcidraz1" {
+  default = "20.1.4.0/24"
+}
+
 variable "publiccidraz2" {
   default = "20.1.10.0/24"
 }
@@ -50,6 +54,10 @@ variable "hasyncmgmtcidraz2" {
 
 variable "tgwycidraz2" {
   default = "20.1.13.0/24"
+}
+
+variable "obcidraz2" {
+  default = "20.1.14.0/24"
 }
 
 // License Type to create FortiGate-VM
@@ -409,6 +417,14 @@ variable "activeport3mask" {
   default = "255.255.255.0"
 }
 
+variable "activeport4" {
+  default = "20.1.4.10"
+}
+
+variable "activeport4mask" {
+  default = "255.255.255.0"
+}
+
 variable "passiveport1" {
   default = "20.1.10.10"
 }
@@ -433,6 +449,14 @@ variable "passiveport3mask" {
   default = "255.255.255.0"
 }
 
+variable "passiveport4" {
+  default = "20.1.13.10"
+}
+
+variable "passiveport4mask" {
+  default = "255.255.255.0"
+}
+
 variable "activeport1gateway" {
   default = "20.1.0.1"
 }
@@ -445,6 +469,10 @@ variable "activeport3gateway" {
   default = "20.1.2.1"
 }
 
+variable "activeport4gateway" {
+  default = "20.1.4.1"
+}
+
 variable "passiveport1gateway" {
   default = "20.1.10.1"
 }
@@ -455,6 +483,10 @@ variable "passiveport2gateway" {
 
 variable "passiveport3gateway" {
   default = "20.1.12.1"
+}
+
+variable "passiveport4gateway" {
+  default = "20.1.13.1"
 }
 
 variable "bootstrap-active" {

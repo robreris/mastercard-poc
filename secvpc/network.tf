@@ -33,6 +33,13 @@ resource "aws_route_table" "tgwrt" {
 
 }
 
+resource "aws_route_table" "obrt" {
+  vpc_id = aws_vpc.fgtvm-vpc.id
+  tags = {
+    Name = "ob-rt"
+  }
+}
+
 resource "aws_route" "externalroute" {
   route_table_id         = aws_route_table.fgtvmpublicrt.id
   destination_cidr_block = "0.0.0.0/0"
@@ -88,6 +95,16 @@ resource "aws_route_table_association" "tgw1associate" {
 resource "aws_route_table_association" "tgw2associate" {
   subnet_id      = aws_subnet.tgwysubnetaz2.id
   route_table_id = aws_route_table.tgwrt.id
+}
+
+resource "aws_route_table_association" "obrtassociateaz1" {
+  subnet_id 	 = aws_subnet.obsubnetaz1.id
+  route_table_id = aws_route_table.obrt.id
+}
+
+resource "aws_route_table_association" "obrtassociateaz2" {
+  subnet_id 	 = aws_subnet.obsubnetaz2.id
+  route_table_id = aws_route_table.obrt.id
 }
 
 resource "aws_eip" "ClusterPublicIP" {

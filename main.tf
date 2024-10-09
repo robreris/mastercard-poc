@@ -71,6 +71,9 @@ module "transitgwy" {
   secvpcaz2_sn_id 	= module.security_vpc.tgwsnaz2
   sec_vpc_id 		= module.security_vpc.secvpcid
   sec_vpc_cidr 		= module.security_vpc.secvpccidr  
+  sec_vpc_obsn_az1      = module.security_vpc.obsubnetaz1
+  sec_vpc_obsn_az2      = module.security_vpc.obsubnetaz2
+  sec_vpc_obrt          = module.security_vpc.obrt
 
 }
 

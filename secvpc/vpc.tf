@@ -82,3 +82,20 @@ resource "aws_subnet" "tgwysubnetaz2" {
   }
 }
 
+resource "aws_subnet" "obsubnetaz1" {
+  vpc_id            = aws_vpc.fgtvm-vpc.id
+  cidr_block        = var.obcidraz1
+  availability_zone = var.az1
+  tags = {
+    Name = "ob subnet az1"
+  }
+}
+
+resource "aws_subnet" "obsubnetaz2" {
+  vpc_id            = aws_vpc.fgtvm-vpc.id
+  cidr_block        = var.obcidraz2
+  availability_zone = var.az2
+  tags = {
+    Name = "ob subnet az2"
+  }
+}

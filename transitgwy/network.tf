@@ -19,3 +19,10 @@ resource "aws_route" "cust2_tgwroute" {
   gateway_id             = aws_ec2_transit_gateway.mstrcrd.id
   depends_on 		 = [null_resource.tgw_wait] 
 }
+
+resource "aws_route" "secvpc_tgwroute" {
+  route_table_id         = var.sec_vpc_obrt
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_ec2_transit_gateway.mstrcrd.id
+  depends_on             = [null_resource.tgw_wait]
+}

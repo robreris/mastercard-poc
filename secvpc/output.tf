@@ -48,6 +48,18 @@ output "tgwsnaz2" {
   value = aws_subnet.tgwysubnetaz2.id
 }
 
+output "obsubnetaz1" {
+  value = aws_subnet.obsubnetaz1.id
+}
+
+output "obsubnetaz2" {
+  value = aws_subnet.obsubnetaz2.id
+}
+
 output "fgtpubrt" {
   value = aws_route_table.fgtvmpublicrt
+}
+
+output "obrt" {
+  value = aws_route_table.obrt.id
 }

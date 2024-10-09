@@ -22,6 +22,13 @@ resource "aws_network_interface" "eth2" {
 }
 
 
+resource "aws_network_interface" "eth3" {
+  description       = "active-port4"
+  subnet_id         = aws_subnet.obsubnetaz1.id
+  private_ips       = [var.activeport4]
+  source_dest_check = false
+}
+
 resource "aws_network_interface_sg_attachment" "publicattachment" {
   depends_on           = [aws_network_interface.eth0]
   security_group_id    = aws_security_group.public_allow.id
@@ -41,6 +48,11 @@ resource "aws_network_interface_sg_attachment" "hasyncmgmtattachment" {
   network_interface_id = aws_network_interface.eth2.id
 }
 
+resource "aws_network_interface_sg_attachment" "obeniattachment" {
+  depends_on           = [aws_network_interface.eth3]
+  security_group_id    = aws_security_group.allow_all.id
+  network_interface_id = aws_network_interface.eth3.id
+}
 
 resource "aws_instance" "fgtactive" {
   //it will use region, architect, and license type to decide which ami to use for deployment
@@ -58,6 +70,8 @@ resource "aws_instance" "fgtactive" {
     port2_mask      = "${var.activeport2mask}"
     port3_ip        = "${var.activeport3}"
     port3_mask      = "${var.activeport3mask}"
+    port4_ip        = "${var.activeport4}"
+    port4_mask      = "${var.activeport4mask}"
     passive_peerip  = "${var.passiveport3}"
     mgmt_gateway_ip = "${var.activeport3gateway}"
     defaultgwy      = "${var.activeport1gateway}"
@@ -92,6 +106,11 @@ resource "aws_instance" "fgtactive" {
   network_interface {
     network_interface_id = aws_network_interface.eth2.id
     device_index         = 2
+  }
+
+  network_interface {
+    network_interface_id = aws_network_interface.eth3.id
+    device_index         = 3
   }
 
   tags = {

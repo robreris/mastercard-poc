@@ -22,3 +22,8 @@ variable "secvpcaz1_sn_id" {}
 
 variable "secvpcaz2_sn_id" {}
 
+variable "sec_vpc_obsn_az1" {}
+
+variable "sec_vpc_obsn_az2" {}
+
+variable "sec_vpc_obrt" {}

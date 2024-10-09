@@ -21,6 +21,12 @@ resource "aws_network_interface" "passiveeth2" {
   source_dest_check = false
 }
 
+resource "aws_network_interface" "passiveeth3" {
+  description       = "passive-port3"
+  subnet_id         = aws_subnet.obsubnetaz2.id
+  private_ips       = [var.passiveport3]
+  source_dest_check = false
+}
 
 resource "aws_network_interface_sg_attachment" "passivepublicattachment" {
   depends_on           = [aws_network_interface.passiveeth0]
@@ -40,6 +46,11 @@ resource "aws_network_interface_sg_attachment" "passivehasyncmgmtattachment" {
   network_interface_id = aws_network_interface.passiveeth2.id
 }
 
+resource "aws_network_interface_sg_attachment" "passiveobeniattachment" {
+  depends_on           = [aws_network_interface.passiveeth3]
+  security_group_id    = aws_security_group.allow_all.id
+  network_interface_id = aws_network_interface.passiveeth3.id
+}
 
 resource "aws_instance" "fgtpassive" {
   depends_on = [aws_instance.fgtactive]
@@ -58,6 +69,8 @@ resource "aws_instance" "fgtpassive" {
     port2_mask      = "${var.passiveport2mask}"
     port3_ip        = "${var.passiveport3}"
     port3_mask      = "${var.passiveport3mask}"
+    port4_ip        = "${var.passiveport4}"
+    port4_mask      = "${var.passiveport4mask}"
     active_peerip   = "${var.activeport3}"
     mgmt_gateway_ip = "${var.passiveport3gateway}"
     defaultgwy      = "${var.passiveport1gateway}"
@@ -92,6 +105,11 @@ resource "aws_instance" "fgtpassive" {
   network_interface {
     network_interface_id = aws_network_interface.passiveeth2.id
     device_index         = 2
+  }
+
+  network_interface {
+    network_interface_id = aws_network_interface.passiveeth3.id
+    device_index         = 3
   }
 
   tags = {
